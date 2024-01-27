@@ -78,7 +78,7 @@ foreach (CURRENT_ARCHITECTURE IN LISTS CURRENT_ARCHITECTURES)
         )
 
         # Include dirs
-        target_include_directories("node-${CURRENT_OS}-${NODE_ABI}" PUBLIC ${CMAKE_SOURCE_DIR}/include)
+        # target_include_directories("node-${CURRENT_OS}-${NODE_ABI}" PUBLIC ${CMAKE_SOURCE_DIR}/include)
         target_include_directories("node-${CURRENT_OS}-${NODE_ABI}" PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/targets/node-${NODE_VERSION}/include/node)
         target_include_directories("node-${CURRENT_OS}-${NODE_ABI}" PUBLIC ${VCPKG_INSTALLED_DIR}/${CURRENT_ARCHITECTURE}-${CURRENT_OS}/include)
         target_include_directories("node-${CURRENT_OS}-${NODE_ABI}" PUBLIC ${VCPKG_INSTALLED_DIR}/${CURRENT_ARCHITECTURE}-${CURRENT_OS}/include/openssl)
