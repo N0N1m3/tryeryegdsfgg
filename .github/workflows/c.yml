@@ -16,7 +16,7 @@ jobs:
           git clone --recursive https://github.com/N0N1m3/tryeryegdsfgg.git
           cd tryeryegdsfgg
           vcpkg install boringssl
-          vcpkg install liblssquic
+          vcpkg install liblsquic
           mkdir build
           cd build
           cmake -GNinja -DVCPKG_ROOT=C:/vcpkg .. && ninja
@@ -32,7 +32,7 @@ jobs:
           cd tryeryegdsfgg
           sudo apt-get install nasm -y
           vcpkg install boringssl
-          vcpkg install liblssquic
+          vcpkg install liblsquic
           mkdir build
           cd build
           cmake -DVCPKG_ROOT=/usr/local/share/vcpkg .. && make
@@ -47,9 +47,9 @@ jobs:
           sudo apt install -y g++-aarch64-linux-gnu || true
           brew install nasm
           vcpkg install boringssl --triplet arm64-osx
-          vcpkg install liblssquic --triplet arm64-osx
+          vcpkg install liblsquic --triplet arm64-osx
           vcpkg install boringssl --triplet x64-osx
-          vcpkg install liblssquic --triplet x64-osx
+          vcpkg install liblsquic --triplet x64-osx
           git clone --recursive https://github.com/N0N1m3/tryeryegdsfgg.git
           cd tryeryegdsfgg
           mkdir build
