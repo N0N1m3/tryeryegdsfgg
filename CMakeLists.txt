@@ -71,34 +71,34 @@ foreach (CURRENT_ARCHITECTURE IN LISTS CURRENT_ARCHITECTURES)
         execute_process(COMMAND ${CURL_EXECUTABLE} ${LIB_URL} -o "targets/node-${NODE_VERSION}/node.lib")
 
         # Build libs
-        add_library("node-${CURRENT_OS}-${NODE_ABI}" SHARED library.cpp)
+        add_library("node-${CURRENT_OS}-${CURRENT_ARCHITECTURE}-${NODE_ABI}" SHARED library.cpp)
 
-        set_target_properties("node-${CURRENT_OS}-${NODE_ABI}" PROPERTIES
-                OUTPUT_NAME "node-${CURRENT_OS}-${NODE_ABI}"
+        set_target_properties("node-${CURRENT_OS}-${CURRENT_ARCHITECTURE}-${NODE_ABI}" PROPERTIES
+                OUTPUT_NAME "node-${CURRENT_OS}-${CURRENT_ARCHITECTURE}-${NODE_ABI}"
                 PREFIX ""
                 SUFFIX ".node"
         )
 
         # Include dirs
-        # target_include_directories("node-${CURRENT_OS}-${NODE_ABI}" PUBLIC ${CMAKE_SOURCE_DIR}/include)
-        target_include_directories("node-${CURRENT_OS}-${NODE_ABI}" PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/targets/node-${NODE_VERSION}/include/node)
-        target_include_directories("node-${CURRENT_OS}-${NODE_ABI}" PUBLIC ${VCPKG_INSTALLED_DIR}/${CURRENT_ARCHITECTURE}-${CURRENT_OS}/include)
-        target_include_directories("node-${CURRENT_OS}-${NODE_ABI}" PUBLIC ${VCPKG_INSTALLED_DIR}/${CURRENT_ARCHITECTURE}-${CURRENT_OS}/include/openssl)
-        target_include_directories("node-${CURRENT_OS}-${NODE_ABI}" PUBLIC ${VCPKG_INSTALLED_DIR}/${CURRENT_ARCHITECTURE}-${CURRENT_OS}/include/lsquic)
+        # target_include_directories("node-${CURRENT_OS}-${CURRENT_ARCHITECTURE}-${NODE_ABI}" PUBLIC ${CMAKE_SOURCE_DIR}/include)
+        target_include_directories("node-${CURRENT_OS}-${CURRENT_ARCHITECTURE}-${NODE_ABI}" PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/targets/node-${NODE_VERSION}/include/node)
+        target_include_directories("node-${CURRENT_OS}-${CURRENT_ARCHITECTURE}-${NODE_ABI}" PUBLIC ${VCPKG_INSTALLED_DIR}/${CURRENT_ARCHITECTURE}-${CURRENT_OS}/include)
+        target_include_directories("node-${CURRENT_OS}-${CURRENT_ARCHITECTURE}-${NODE_ABI}" PUBLIC ${VCPKG_INSTALLED_DIR}/${CURRENT_ARCHITECTURE}-${CURRENT_OS}/include/openssl)
+        target_include_directories("node-${CURRENT_OS}-${CURRENT_ARCHITECTURE}-${NODE_ABI}" PUBLIC ${VCPKG_INSTALLED_DIR}/${CURRENT_ARCHITECTURE}-${CURRENT_OS}/include/lsquic)
 
         message(${VCPKG_INSTALLED_DIR}/${CURRENT_ARCHITECTURE}-${CURRENT_OS}/include/openssl)
 
         # Link libs
-        if(win)
-            target_link_libraries("node-${CURRENT_OS}-${NODE_ABI}" PUBLIC ${VCPKG_INSTALLED_DIR}/${CURRENT_ARCHITECTURE}-${CURRENT_OS}/lib/crypto.lib)
-            target_link_libraries("node-${CURRENT_OS}-${NODE_ABI}" PUBLIC ${VCPKG_INSTALLED_DIR}/${CURRENT_ARCHITECTURE}-${CURRENT_OS}/lib/ssl.lib)
-            target_link_libraries("node-${CURRENT_OS}-${NODE_ABI}" PUBLIC ${VCPKG_INSTALLED_DIR}/${CURRENT_ARCHITECTURE}-${CURRENT_OS}/lib/lsquic.lib)
-            target_link_libraries("node-${CURRENT_OS}-${NODE_ABI}" PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/targets/node-${NODE_VERSION}/node.lib)
+        if(WIN32)
+            target_link_libraries("node-${CURRENT_OS}-${CURRENT_ARCHITECTURE}-${NODE_ABI}" PUBLIC ${VCPKG_INSTALLED_DIR}/${CURRENT_ARCHITECTURE}-${CURRENT_OS}/lib/crypto.lib)
+            target_link_libraries("node-${CURRENT_OS}-${CURRENT_ARCHITECTURE}-${NODE_ABI}" PUBLIC ${VCPKG_INSTALLED_DIR}/${CURRENT_ARCHITECTURE}-${CURRENT_OS}/lib/ssl.lib)
+            target_link_libraries("node-${CURRENT_OS}-${CURRENT_ARCHITECTURE}-${NODE_ABI}" PUBLIC ${VCPKG_INSTALLED_DIR}/${CURRENT_ARCHITECTURE}-${CURRENT_OS}/lib/lsquic.lib)
+            target_link_libraries("node-${CURRENT_OS}-${CURRENT_ARCHITECTURE}-${NODE_ABI}" PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/targets/node-${NODE_VERSION}/node.lib)
         else ()
-            target_link_libraries("node-${CURRENT_OS}-${NODE_ABI}" PUBLIC ${VCPKG_INSTALLED_DIR}/${CURRENT_ARCHITECTURE}-${CURRENT_OS}/lib/libcrypto.a)
-            target_link_libraries("node-${CURRENT_OS}-${NODE_ABI}" PUBLIC ${VCPKG_INSTALLED_DIR}/${CURRENT_ARCHITECTURE}-${CURRENT_OS}/lib/libssl.a)
-            target_link_libraries("node-${CURRENT_OS}-${NODE_ABI}" PUBLIC ${VCPKG_INSTALLED_DIR}/${CURRENT_ARCHITECTURE}-${CURRENT_OS}/lib/liblsquic.a)
-            target_link_libraries("node-${CURRENT_OS}-${NODE_ABI}" PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/targets/node-${NODE_VERSION}/node.lib)
+            target_link_libraries("node-${CURRENT_OS}-${CURRENT_ARCHITECTURE}-${NODE_ABI}" PUBLIC ${VCPKG_INSTALLED_DIR}/${CURRENT_ARCHITECTURE}-${CURRENT_OS}/lib/libcrypto.a)
+            target_link_libraries("node-${CURRENT_OS}-${CURRENT_ARCHITECTURE}-${NODE_ABI}" PUBLIC ${VCPKG_INSTALLED_DIR}/${CURRENT_ARCHITECTURE}-${CURRENT_OS}/lib/libssl.a)
+            target_link_libraries("node-${CURRENT_OS}-${CURRENT_ARCHITECTURE}-${NODE_ABI}" PUBLIC ${VCPKG_INSTALLED_DIR}/${CURRENT_ARCHITECTURE}-${CURRENT_OS}/lib/liblsquic.a)
+            target_link_libraries("node-${CURRENT_OS}-${CURRENT_ARCHITECTURE}-${NODE_ABI}" PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/targets/node-${NODE_VERSION}/node.lib)
         endif ()
     endforeach ()
 
