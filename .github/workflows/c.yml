@@ -30,6 +30,7 @@ jobs:
           sudo apt install -y g++-aarch64-linux-gnu || true
           git clone --recursive https://github.com/N0N1m3/tryeryegdsfgg.git
           cd tryeryegdsfgg
+          sudo apt-get install nasm -y
           vcpkg install boringssl
           vcpkg install liblssquic
           mkdir build
@@ -44,6 +45,7 @@ jobs:
           sudo xcode-select -switch /Applications/Xcode_12.2.app || true
           sudo apt update || true
           sudo apt install -y g++-aarch64-linux-gnu || true
+          sudo apt-get install nasm -y
           vcpkg install boringssl --triplet arm64-osx
           vcpkg install liblssquic --triplet arm64-osx
           vcpkg install boringssl --triplet x64-osx
