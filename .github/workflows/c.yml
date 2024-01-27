@@ -20,6 +20,7 @@ jobs:
           mkdir build
           cd build
           cmake -GNinja -DVCPKG_ROOT=C:/vcpkg .. && ninja
+          ls
           
   build-linux:
     runs-on: ubuntu-22.04
@@ -36,6 +37,7 @@ jobs:
           mkdir build
           cd build
           cmake -DVCPKG_ROOT=/usr/local/share/vcpkg .. && make
+          ls
           
   build-mac:
     runs-on: macos-11.0
@@ -55,3 +57,4 @@ jobs:
           mkdir build
           cd build
           cmake -DVCPKG_ROOT=/usr/local/share/vcpkg .. && make
+          ls
