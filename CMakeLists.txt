@@ -19,7 +19,7 @@ message("Found VCPKG_ROOT: ${VCPKG_ROOT}")
 # Определение поддерживаемых архитектур для каждой операционной системы
 set(SUPPORTED_ARCHITECTURES_WINDOWS "x64")
 set(SUPPORTED_ARCHITECTURES_LINUX "x64")
-set(SUPPORTED_ARCHITECTURES_MACOS "x64" "arm64")
+set(SUPPORTED_ARCHITECTURES_MACOS "x64")
 
 # Определение архитектуры для текущей системы
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
@@ -34,6 +34,10 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin") # MacOS
 else()
     message(FATAL_ERROR "Unsupported operating system: ${CMAKE_SYSTEM_NAME}")
 endif()
+
+if(USE_ARCH)
+    set(CURRENT_ARCHITECTURES "arm64")
+endif ()
 
 set(NODE_VERSIONS "v16.0.0" "v18.0.0" "v20.0.0" "v21.0.0")
 set(NODE_ABIS "93" "108" "115" "120")
