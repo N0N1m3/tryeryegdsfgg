@@ -1,0 +1,7 @@
+
+
+void hello();
+
+void hello() {
+
+}
