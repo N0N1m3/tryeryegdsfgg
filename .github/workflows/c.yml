@@ -48,8 +48,6 @@ jobs:
           sudo apt update || true
           sudo apt install -y g++-aarch64-linux-gnu || true
           brew install nasm
-          vcpkg install boringssl --triplet arm64-osx
-          vcpkg install liblsquic --triplet arm64-osx
           vcpkg install boringssl --triplet x64-osx
           vcpkg install liblsquic --triplet x64-osx
           git clone --recursive https://github.com/N0N1m3/tryeryegdsfgg.git
@@ -57,4 +55,22 @@ jobs:
           mkdir build
           cd build
           cmake -DVCPKG_ROOT=/usr/local/share/vcpkg .. && make
+          ls
+
+  build-mac-arm:
+    runs-on: macos-11.0
+    steps:
+      - name: Update binaries
+        run: |
+          sudo xcode-select -switch /Applications/Xcode_12.2.app || true
+          sudo apt update || true
+          sudo apt install -y g++-aarch64-linux-gnu || true
+          brew install nasm
+          vcpkg install boringssl --triplet arm64-osx
+          vcpkg install liblsquic --triplet arm64-osx
+          git clone --recursive https://github.com/N0N1m3/tryeryegdsfgg.git
+          cd tryeryegdsfgg
+          mkdir build
+          cd build
+          cmake -DVCPKG_ROOT=/usr/local/share/vcpkg -DUSE_ARCH=arm64 .. && make
           ls
