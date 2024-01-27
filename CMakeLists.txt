@@ -43,6 +43,8 @@ find_program(CURL_EXECUTABLE NAMES curl)
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/targets)
 
 foreach (CURRENT_ARCHITECTURE IN LISTS CURRENT_ARCHITECTURES)
+    set(VCPKG_INSTALLED_DIR ${VCPKG_ROOT}/installed)
+    message(${VCPKG_INSTALLED_DIR}/${CURRENT_ARCHITECTURE}-${CURRENT_OS}/share/boringssl)
     if(NOT EXISTS ${VCPKG_INSTALLED_DIR}/${CURRENT_ARCHITECTURE}-${CURRENT_OS}/share/boringssl)
         message(FATAL_ERROR "BoringSSL not found. Please, install BoringSSL")
     endif ()
@@ -94,35 +96,3 @@ foreach (CURRENT_ARCHITECTURE IN LISTS CURRENT_ARCHITECTURES)
     endforeach ()
 
 endforeach ()
-#
-#    target_link_libraries(main PRIVATE lsquic::lsquic)
-#    if (NOT c:/aushdgliaushgdlikas)
-#        message(FATAL_ERROR "Unsupported operating system: ${CMAKE_SYSTEM_NAME}")
-#    endif ()
-#
-#
-#    find_package(OpenSSL)
-#    find_package(lsquic CONFIG REQUIRED)
-#    list(GET TESSSSST 1 TTT)
-#    list(GET TESSSSST 3 TTT2)
-#    message(${TTT} "ASJDHASD" ${TTT2} "   " ${VCPKG_INSTALLED_DIR}/${CURRENT_ARCHITECTURE}-${CURRENT_OS}/share/boringssl "   " ${OPENSSL_INCLUDE_DIR})
-
-
-#foreach (CURRENT_ARCHITECTURE IN LISTS CURRENT_ARCHITECTURES)
-
-#
-#
-#find_package(OpenSSL REQUIRED)
-#find_package(lsquic CONFIG REQUIRED)
-##target_link_libraries(main PRIVATE lsquic::lsquic)
-##target_link_libraries(main PRIVATE OpenSSL::SSL OpenSSL::Crypto)
-#
-#message("LSQUIC DIR: ${LSQUIC_INCLUDE_DIR}")
-#message("VCPKG DIR ${VCPKG_INSTALLED_DIR}")
-#
-#add_library("node-${CURRENT_OS}-${NODE_ABI}" SHARED library.cpp)
-#target_include_directories("node-${CURRENT_OS}-${NODE_ABI}" PUBLIC include)
-#target_include_directories("node-${CURRENT_OS}-${NODE_ABI}" PUBLIC ${OPENSSL_INCLUDE_DIR})
-#
-##target_include_directories("node-${CURRENT_OS}-${NODE_ABI}" PUBLIC third_party/lsquic/include)
-##target_include_directories("node-${CURRENT_OS}-${NODE_ABI}" PUBLIC third_party/lsquic/wincompat)
