@@ -1,0 +1,55 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: ilammy/msvc-dev-cmd@v1
+      - uses: ilammy/setup-nasm@v1.2.1
+      - name: Update binaries
+        run: |
+          $ErrorActionPreference = 'SilentlyContinue'
+          git clone --recursive https://github.com/N0N1m3/tryeryegdsfgg.git
+          cd tryeryegdsfgg
+          vcpkg install boringssl
+          vcpkg install liblssquic
+          mkdir build
+          cd build
+          cmake -GNinja .. && ninja
+          
+  build-linux:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Update binaries
+        run: |
+          sudo apt update || true
+          sudo apt install -y g++-aarch64-linux-gnu || true
+          git clone --recursive https://github.com/N0N1m3/tryeryegdsfgg.git
+          cd tryeryegdsfgg
+          vcpkg install boringssl
+          vcpkg install liblssquic
+          mkdir build
+          cd build
+          cmake .. && make
+          
+  build-mac:
+    runs-on: macos-11.0
+    steps:
+      - name: Update binaries
+        run: |
+          sudo xcode-select -switch /Applications/Xcode_12.2.app || true
+          sudo apt update || true
+          sudo apt install -y g++-aarch64-linux-gnu || true
+          vcpkg install boringssl --triplet arm64-osx
+          vcpkg install liblssquic --triplet arm64-osx
+          vcpkg install boringssl --triplet x64-osx
+          vcpkg install liblssquic --triplet x64-osx
+          git clone --recursive https://github.com/N0N1m3/tryeryegdsfgg.git
+          cd tryeryegdsfgg
+          mkdir build
+          cd build
+          cmake .. && make
